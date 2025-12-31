@@ -87,6 +87,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('rentals.index') }}">Rental</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('reports.index') }}">Laporan</a>
                 </ul>
             </div>
         </div>

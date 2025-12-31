@@ -50,6 +50,9 @@ class DashboardController extends Controller
         $monthlyRevenue = Rental::whereMonth('created_at', $currentMonth)
             ->where('status', '!=', 'cancelled')
             ->sum('total_cost');
+
+        // TOTAL PENDAPATAN SEDERHANA - TAMBAH INI
+        $totalRevenue = Rental::where('status', 'completed')->sum('total_cost');
         
         $stats = [
             'total_customers' => $totalCustomers,
@@ -66,8 +69,11 @@ class DashboardController extends Controller
             'recent_rentals' => $recentRentals,
             'recent_customers' => $recentCustomers,
             'recent_cars' => $recentCars,
+            'total_revenue' => $totalRevenue,
         ];
+
         
+
         return view('dashboard', compact('stats'));
     }
 }

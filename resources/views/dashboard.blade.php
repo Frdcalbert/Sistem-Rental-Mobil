@@ -13,6 +13,20 @@
 <!-- Stats Cards -->
 <div class="row mb-4">
     <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Pendapatan</h6>
+                        <h3 class="mb-0">Rp {{ number_format($stats['total_revenue'], 0, ',', '.') }}</h3>
+                        <small class="opacity-75">Dari rental selesai</small>
+                    </div>
+                    <i class="fas fa-money-bill-wave fa-2x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="card text-white bg-primary">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -69,7 +83,6 @@
     </div>
 </div>
 
-<!-- Recent Rentals -->
 <!-- Recent Rentals -->
 <div class="row">
     <div class="col-md-12">
