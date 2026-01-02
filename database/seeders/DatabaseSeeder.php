@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 'license_plate' => 'B 5678 DEF',
                 'year' => 2021,
                 'daily_rate' => 300000,
-                'status' => 'available',
+                'status' => 'rented',
                 'color' => 'Red'
             ],
             [
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
                 'license_plate' => 'B 9012 GHI',
                 'year' => 2023,
                 'daily_rate' => 450000,
-                'status' => 'available',
+                'status' => 'rented',
                 'color' => 'White'
             ],
             [
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
                 'end_date' => Carbon::now()->addDays(2),
                 'total_days' => 7,
                 'total_cost' => 2450000,
-                'status' => 'active'
+                'status' => 'completed  '
             ],
             [
                 'customer_id' => 2,
@@ -110,7 +110,7 @@ class DatabaseSeeder extends Seeder
                 'end_date' => Carbon::now()->subDays(3),
                 'total_days' => 7,
                 'total_cost' => 2100000,
-                'status' => 'completed'
+                'status' => 'active'
             ],
             [
                 'customer_id' => 3,

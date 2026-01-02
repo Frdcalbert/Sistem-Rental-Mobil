@@ -66,17 +66,17 @@
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <a href="{{ route('rentals.show', $rental) }}" class="btn btn-info" title="Detail">
+                                    <a href="{{ route('rentals.show', $rental) }}" class="btn btn-info me-2" title="Detail">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('rentals.edit', $rental) }}" class="btn btn-warning" title="Edit">
+                                    <a href="{{ route('rentals.edit', $rental) }}" class="btn btn-warning me-2" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form action="{{ route('rentals.destroy', $rental) }}" method="POST" 
                                           class="d-inline" onsubmit="return confirm('Hapus rental #{{ $rental->id }}?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" title="Hapus">
+                                        <button type="submit" class="btn btn-danger me-2" title="Hapus">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>

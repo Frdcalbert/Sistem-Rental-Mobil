@@ -3,33 +3,33 @@
 @section('title', 'Laporan Rental')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1><i class="fas fa-file-alt"></i> Laporan Rental</h1>
-    <a href="{{ route('dashboard') }}" class="btn btn-secondary">
-        <i class="fas fa-arrow-left"></i> Kembali
-    </a>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1 class="page-title">
+            <i class="fas fa-chart-bar me-2"></i>Laporan Rental
+        </h1>
+        <p class="text-muted">Analisis data dan statistik rental</p>
+    </div>
 </div>
 
-<!-- Filter Sederhana -->
+<!-- Filter -->
 <div class="card mb-4">
     <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-filter"></i> Filter</h5>
+        <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filter Laporan</h5>
     </div>
     <div class="card-body">
         <form action="{{ route('reports.index') }}" method="GET" class="row g-3">
             <div class="col-md-4">
-                <label for="start_date" class="form-label">Dari Tanggal</label>
-                <input type="date" class="form-control" id="start_date" name="start_date" 
-                       value="{{ $startDate }}">
+                <label class="form-label">Dari Tanggal</label>
+                <input type="date" class="form-control" name="start_date" value="{{ $startDate }}">
             </div>
             <div class="col-md-4">
-                <label for="end_date" class="form-label">Sampai Tanggal</label>
-                <input type="date" class="form-control" id="end_date" name="end_date" 
-                       value="{{ $endDate }}">
+                <label class="form-label">Sampai Tanggal</label>
+                <input type="date" class="form-control" name="end_date" value="{{ $endDate }}">
             </div>
             <div class="col-md-4">
-                <label for="status" class="form-label">Status</label>
-                <select name="status" id="status" class="form-select">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select">
                     <option value="all" {{ $status == 'all' ? 'selected' : '' }}>Semua Status</option>
                     <option value="active" {{ $status == 'active' ? 'selected' : '' }}>Aktif</option>
                     <option value="completed" {{ $status == 'completed' ? 'selected' : '' }}>Selesai</option>
@@ -38,56 +38,45 @@
             </div>
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-search"></i> Tampilkan
+                    <i class="fas fa-search me-2"></i>Terapkan Filter
                 </button>
-                <a href="{{ route('reports.index') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-sync"></i> Reset
+                <a href="{{ route('reports.index') }}" class="btn btn-secondary">
+                    <i class="fas fa-redo me-2"></i>Reset
                 </a>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Statistik Sederhana -->
+<!-- Summary -->
 <div class="row mb-4">
     <div class="col-md-6">
-        <div class="card bg-success text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="card-title">Total Pendapatan</h6>
-                        <h3 class="mb-0">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h3>
-                        <small class="opacity-75">Periode terpilih</small>
-                    </div>
-                    <i class="fas fa-money-bill-wave fa-2x opacity-50"></i>
-                </div>
+        <div class="stats-card">
+            <div class="stats-icon success">
+                <i class="fas fa-money-bill-wave"></i>
             </div>
+            <h3 class="stats-number">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h3>
+            <p class="stats-label">Total Pendapatan</p>
+            <small class="text-muted">Periode: {{ $startDate }} s/d {{ $endDate }}</small>
         </div>
     </div>
-    
     <div class="col-md-6">
-        <div class="card bg-primary text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="card-title">Total Transaksi</h6>
-                        <h3 class="mb-0">{{ $totalRentals }}</h3>
-                        <small class="opacity-75">Rental ditemukan</small>
-                    </div>
-                    <i class="fas fa-file-invoice-dollar fa-2x opacity-50"></i>
-                </div>
+        <div class="stats-card">
+            <div class="stats-icon primary">
+                <i class="fas fa-file-invoice-dollar"></i>
             </div>
+            <h3 class="stats-number">{{ $totalRentals }}</h3>
+            <p class="stats-label">Total Transaksi</p>
+            <small class="text-muted">Rental ditemukan</small>
         </div>
     </div>
 </div>
 
-<!-- Tabel Data -->
+<!-- Data Table -->
 <div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">
-            <i class="fas fa-list"></i> Data Rental 
-            <span class="badge bg-info">{{ $rentals->total() }} data</span>
-        </h5>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Data Rental</h5>
+        <span class="badge bg-info">{{ $rentals->total() }} data</span>
     </div>
     <div class="card-body">
         @if($rentals->count() > 0)
@@ -112,8 +101,11 @@
                             <td>{{ $rental->customer->name }}</td>
                             <td>{{ $rental->car->brand }} {{ $rental->car->model }}</td>
                             <td>
-                                {{ \Carbon\Carbon::parse($rental->start_date)->format('d/m/Y') }}<br>
-                                <small>s/d {{ \Carbon\Carbon::parse($rental->end_date)->format('d/m/Y') }}</small>
+                                <small>
+                                    {{ \Carbon\Carbon::parse($rental->start_date)->format('d/m/Y') }}<br>
+                                    <strong>s/d</strong><br>
+                                    {{ \Carbon\Carbon::parse($rental->end_date)->format('d/m/Y') }}
+                                </small>
                             </td>
                             <td>
                                 <strong class="text-success">
