@@ -2,7 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/*.php",
+      "src": "public/index.php",
+      "use": "vercel-php@0.6.2"
+    },
+    {
+      "src": "public/migrate.php",
       "use": "vercel-php@0.6.2"
     }
   ],
