@@ -18,6 +18,16 @@ Route::get('/gas-migrate', function () {
     }
 });
 
+Route::get('/gas-seed', function () {
+    try {
+        // Menjalankan perintah db:seed
+        Artisan::call('db:seed', ['--force' => true]);
+        return "<h1>Data Dummy Berhasil Dimasukkan!</h1><pre>" . Artisan::output() . "</pre>";
+    } catch (\Exception $e) {
+        return "<h1>Gagal_:</h1>" . $e->getMessage();
+    }
+});
+
 // Dashboard
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
