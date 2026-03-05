@@ -45,6 +45,21 @@ require __DIR__.'/../vendor/autoload.php';
 */
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
+// --- KODE TAMBAHAN UNTUK VERCEL ---
+$app->useStoragePath('/tmp/storage');
+$app->useBootstrapPath('/tmp/bootstrap');
+$dirs = [
+    '/tmp/storage/app',
+    '/tmp/storage/framework/cache/data',
+    '/tmp/storage/framework/sessions',
+    '/tmp/storage/framework/views',
+    '/tmp/storage/logs',
+    '/tmp/bootstrap/cache',
+];
+foreach ($dirs as $dir) {
+    if (!is_dir($dir)) mkdir($dir, 0777, true);
+}
+// --- AKHIR KODE TAMBAHAN ---
 
 $kernel = $app->make(Kernel::class);
 
