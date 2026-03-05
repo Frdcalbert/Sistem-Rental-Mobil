@@ -7,26 +7,6 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\ReportController; 
 
-use Illuminate\Support\Facades\Artisan;
-
-Route::get('/gas-migrate', function () {
-    try {
-        Artisan::call('migrate', ['--force' => true]);
-        return "<h1>Migrasi Berhasil!</h1><pre>" . Artisan::output() . "</pre>";
-    } catch (\Exception $e) {
-        return "<h1>Gagal:</h1>" . $e->getMessage();
-    }
-});
-
-Route::get('/gas-seed', function () {
-    try {
-        // Menjalankan perintah db:seed
-        Artisan::call('db:seed', ['--force' => true]);
-        return "<h1>Data Dummy Berhasil Dimasukkan!</h1><pre>" . Artisan::output() . "</pre>";
-    } catch (\Exception $e) {
-        return "<h1>Gagal_:</h1>" . $e->getMessage();
-    }
-});
 
 // Dashboard
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
